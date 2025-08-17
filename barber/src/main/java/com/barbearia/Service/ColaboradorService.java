@@ -1,0 +1,67 @@
+package com.barbearia.Service;
+
+import com.barbearia.Model.Colaborador;
+import com.barbearia.Util.PersistenciaTemplate;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class ColaboradorService extends PersistenciaTemplate<Colaborador> {
+private List<Colaborador> colaboradores;
+
+    public ColaboradorService() {
+        super("colaboradores.json");
+        this.colaboradores = carregarDados(); // carrega do JSON ou inicializa
+    }
+
+    @Override
+    protected Class<Colaborador> getTipoClasse() {
+        return Colaborador.class;
+    }
+
+    @Override
+    protected List<Colaborador> inicializarDadosPadrao() {
+        // lista estática como fonte inicial
+        return new ArrayList<>(ListaColaboradores.getColaboradores());
+    }
+
+    // métodos específicos do serviço
+    public List<Colaborador> listarTodosColaboradores() {
+        return new ArrayList<>(colaboradores);
+    }
+
+    public Optional<Colaborador> buscarPorId(int id) {
+        return colaboradores.stream()
+                .filter(c -> c.getId() == id)
+                .findFirst();
+    }
+
+    public Optional<Colaborador> buscarPorNome(String nome) {
+        return colaboradores.stream()
+                .filter(c -> c.getNome().equalsIgnoreCase(nome))
+                .findFirst();
+    }
+
+    public void adicionarColaborador(Colaborador novoColaborador) {
+        // verifica se o ID já existe
+        if (colaboradores.stream().anyMatch(c -> c.getId() == novoColaborador.getId())) {
+            throw new RuntimeException("Já existe um colaborador com este ID");
+        }
+        
+        colaboradores.add(novoColaborador);
+        salvarDados(colaboradores); // persiste no JSON
+    }
+
+    public void atualizarColaborador(Colaborador colaboradorAtualizado) {
+        colaboradores.removeIf(c -> c.getId() == colaboradorAtualizado.getId());
+        colaboradores.add(colaboradorAtualizado);
+        salvarDados(colaboradores);
+    }
+
+    public void removerColaborador(int id) {
+        colaboradores.removeIf(c -> c.getId() == id);
+        salvarDados(colaboradores);
+    }
+}
