@@ -1,4 +1,4 @@
-package com.barbearia.model;
+package com.barbearia.Model;
 
 
 import java.util.ArrayList;

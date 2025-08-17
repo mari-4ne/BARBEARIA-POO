@@ -1,4 +1,4 @@
-package Model;
+package com.barbearia.Model;
 
 public enum DiaDaSemana {
     SEGUNDA,

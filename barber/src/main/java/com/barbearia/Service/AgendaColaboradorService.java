@@ -1,4 +1,4 @@
-package Service;
+package com.barbearia.Service;
 
 public class AgendaColaboradorService {
     
