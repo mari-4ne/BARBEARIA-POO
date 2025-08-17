@@ -1,4 +1,4 @@
-package com.Controller;
+package com.barbearia.Controller;
 
 public class AgendamentoControler {
     
