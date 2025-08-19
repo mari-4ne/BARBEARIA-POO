@@ -1,6 +1,7 @@
 package com.barbearia.Service;
 
 import com.barbearia.Model.Colaborador;
+import com.barbearia.Model.DiaDaSemana;
 import com.barbearia.Util.PersistenciaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -64,4 +65,38 @@ private List<Colaborador> colaboradores;
         colaboradores.removeIf(c -> c.getId() == id);
         salvarDados(colaboradores);
     }
+
+    //metodos para o controll
+    public void removerHorarioDisponivel(int colaboradorId, DiaDaSemana dia, String horario) {
+    //encontrar o colaborador
+    Optional<Colaborador> colaboradorOpt = buscarPorId(colaboradorId);
+
+    if (colaboradorOpt.isPresent()) {
+        Colaborador colaborador = colaboradorOpt.get();
+        // remover o horário da lista dele
+        colaborador.removerHorario(dia, horario);
+        // Salva a lista  atualizada
+        salvarDados(colaboradores);
+    } else {
+        throw new RuntimeException("Colaborador não encontrado!");
+    }
+}
+
+public void adicionarHorarioDisponivel(int colaboradorId, DiaDaSemana dia, String horario) {
+    Optional<Colaborador> colaboradorOpt = buscarPorId(colaboradorId);
+
+    if (colaboradorOpt.isPresent()) {
+        Colaborador colaborador = colaboradorOpt.get();
+        colaborador.adicionarHorario(dia, horario);
+        salvarDados(this.colaboradores);
+    } else {
+        throw new RuntimeException("Colaborador não encontrado!");
+    }
+}
+
+public List<String> getHorariosDoColaborador(int colaboradorId, DiaDaSemana dia) {
+    return buscarPorId(colaboradorId)
+            .map(colaborador -> colaborador.getHorariosDisponiveis(dia))
+            .orElse(new ArrayList<>());
+}
 }

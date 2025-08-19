@@ -8,6 +8,11 @@ public class Agendamento {
     private LocalDateTime horario;
     private Colaborador colaborador; 
 
+
+    //construtor vazio para formulario
+    public Agendamento() {
+    }
+
     public Agendamento( Cliente cliente, String corteDesejado, LocalDateTime horario, Colaborador colaborador) {
         this.cliente = cliente;
         this.corteDesejado = corteDesejado;
