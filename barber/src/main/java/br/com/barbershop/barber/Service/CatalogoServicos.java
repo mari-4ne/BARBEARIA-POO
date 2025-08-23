@@ -1,10 +1,11 @@
-package com.barbearia.Service;
-import com.barbearia.Model.CortarCabelo;
-import com.barbearia.Model.FazerBarba;
-import com.barbearia.Model.Servico;
-
+package br.com.barbershop.barber.Service;
 import java.util.ArrayList;
 import java.util.List;
+
+import br.com.barbershop.barber.Model.CortarCabelo;
+import br.com.barbershop.barber.Model.FazerBarba;
+import br.com.barbershop.barber.Model.Servico;
+
 import java.util.Collections;
 public class CatalogoServicos {
 

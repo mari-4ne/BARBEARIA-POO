@@ -1,9 +1,10 @@
-package com.barbearia.Service;
+package br.com.barbershop.barber.Service;
 
-import com.barbearia.Model.Agendamento;
-import com.barbearia.Model.Colaborador;
-import com.barbearia.Model.DiaDaSemana;
-import com.barbearia.Util.PersistenciaTemplate;
+import br.com.barbershop.barber.Model.Agendamento;
+import br.com.barbershop.barber.Model.Colaborador;
+import br.com.barbershop.barber.Model.DiaDaSemana;
+import br.com.barbershop.barber.Util.PersistenciaTemplate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

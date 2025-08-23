@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@700&display=swap');
+
+/* Estilos gerais */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    color: #E6A15C; /* Cor principal do texto e ícones */
+    overflow: hidden; /* Evita barras de rolagem */
+}
+
+/* Camada escura sobre a imagem de fundo */
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('Fundo-Paginainicial.png') no-repeat center center/cover;
+    filter: brightness(0.3) blur(3px); /* Escurece e desfoca a imagem */
+    z-index: -1;
+}
+
+/* Container principal */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Cabeçalho */
+header h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 5rem; /* Tamanho grande para o título */
+    letter-spacing: 5px;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.mustache svg {
+    width: 150px;
+    height: auto;
+    fill: #E6A15C; /* Cor do bigode */
+    margin: 10px 0 40px 0;
+}
+
+/* Seção de opções */
+.options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px; /* Espaço entre as duas opções */
+    width: 100%;
+    flex-wrap: wrap; /* Permite que os itens quebrem a linha em telas menores */
+}
+
+/* NOVO: Estilo para a tag <a> que funciona como link/botão */
+.option-link {
+    text-decoration: none; /* Remove o sublinhado do link */
+    color: inherit; /* Faz o link herdar a cor do elemento pai */
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.option:hover {
+    transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+}
+
+.option .fa-user {
+    font-size: 4rem; /* Tamanho do ícone */
+    margin-bottom: 20px;
+}
+
+.option h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.option p {
+    margin: 5px 0 0 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 3rem;
+    }
+
+    .options {
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .option h2, .option p {
+        font-size: 1.2rem;
+    }
+
+    .option .fa-user {
+        font-size: 3rem;
+    }
+}

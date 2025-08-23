@@ -3,10 +3,10 @@ package br.com.barbershop.barber;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.barbearia.Model.Agendamento;
-import com.barbearia.Service.AgendamentoService;
-import com.barbearia.Service.ColaboradorService;
-import com.barbearia.Service.impl.AgendamentoServiceImpl;
+import br.com.barbershop.barber.Model.Agendamento;
+import br.com.barbershop.barber.Service.AgendamentoService;
+import br.com.barbershop.barber.Service.ColaboradorService;
+import br.com.barbershop.barber.Service.AgendamentoService;
 
 public class AgendamentoServiceTests {
 

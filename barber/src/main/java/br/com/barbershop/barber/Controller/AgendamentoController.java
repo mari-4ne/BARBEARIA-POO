@@ -1,10 +1,10 @@
-package com.barbearia.Controller; // Supondo que você tenha um pacote Controller
+package br.com.barbershop.barber.Controller; // Supondo que você tenha um pacote Controller
 
-import com.barbearia.Model.Agendamento;
-import com.barbearia.Model.Colaborador;
-import com.barbearia.Service.AgendamentoService;
-import com.barbearia.Service.ColaboradorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.barbershop.barber.Model.Agendamento;
+import br.com.barbershop.barber.Model.Colaborador;
+import br.com.barbershop.barber.Service.AgendamentoService;
+import br.com.barbershop.barber.Service.ColaboradorService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ public class AgendamentoController {
     private final AgendamentoService agendamentoService;
     private final ColaboradorService colaboradorService;
 
-    @Autowired
+    
     public AgendamentoController(AgendamentoService agendamentoService, ColaboradorService colaboradorService) {
         this.agendamentoService = agendamentoService;
         this.colaboradorService = colaboradorService;

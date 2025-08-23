@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Agendamento</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+             </header>
+
+        <main class="step-content">
+            <div class="summary-section">
+                <div class="summary-item" th:if="${agendamento.colaborador != null}">
+                    <p>BARBEIRO ESCOLHIDO:</p>
+                    <div class="value">
+                        <span class="icon"></span>
+                        <span th:text="${agendamento.colaborador.nome}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="options-section">
+                <h2>DIAS DISPONIVEIS:</h2>
+                <div class="options-box day-list">
+                    <form th:action="@{/agendamento/passo3}" method="post">
+                        <div th:each="dia : ${diasDaSemana}" th:if="${dia.name() != 'SABADO' and dia.name() != 'DOMINGO'}">
+                            <button type="submit" name="dia" th:value="${dia.name()}" class="choice-btn"
+                                    th:text="${dia.name().substring(0,1) + dia.name().substring(1).toLowerCase()}">
+                                Dia da Semana
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

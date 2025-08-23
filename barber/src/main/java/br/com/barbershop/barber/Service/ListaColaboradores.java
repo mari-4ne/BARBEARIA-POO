@@ -1,8 +1,10 @@
-package com.barbearia.Service;
+package br.com.barbershop.barber.Service;
 
-import com.barbearia.Model.Colaborador;
 import java.util.Collections;
 import java.util.List;
+
+import br.com.barbershop.barber.Model.Colaborador;
+
 import java.util.ArrayList;
 
 public class ListaColaboradores {

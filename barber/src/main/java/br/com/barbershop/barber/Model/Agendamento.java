@@ -1,4 +1,4 @@
-package com.barbearia.Model;
+package br.com.barbershop.barber.Model;
 
 import java.time.LocalDateTime;
 

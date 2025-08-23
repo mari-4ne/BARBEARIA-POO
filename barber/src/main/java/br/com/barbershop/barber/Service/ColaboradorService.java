@@ -1,14 +1,15 @@
-package com.barbearia.Service;
+package br.com.barbershop.barber.Service;
 
-import com.barbearia.Model.Colaborador;
-import com.barbearia.Model.DiaDaSemana;
-import com.barbearia.Util.PersistenciaTemplate;
+import br.com.barbershop.barber.Model.Colaborador;
+import br.com.barbershop.barber.Model.DiaDaSemana;
+import br.com.barbershop.barber.Util.PersistenciaTemplate;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class ColaboradorService extends PersistenciaTemplate<Colaborador> {
 private List<Colaborador> colaboradores;
 

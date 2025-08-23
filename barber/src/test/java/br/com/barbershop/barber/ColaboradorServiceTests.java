@@ -2,8 +2,9 @@ package br.com.barbershop.barber;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import com.barbearia.Service.ColaboradorService;
-import com.barbearia.Model.Colaborador;
+
+import br.com.barbershop.barber.Model.Colaborador;
+import br.com.barbershop.barber.Service.ColaboradorService;
 public class ColaboradorServiceTests {
 
     private ColaboradorService colaboradorService = new ColaboradorService();

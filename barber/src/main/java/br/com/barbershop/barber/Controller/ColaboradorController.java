@@ -1,8 +1,8 @@
-package com.barbearia.Controller;
+package br.com.barbershop.barber.Controller;
 
-import com.barbearia.Model.DiaDaSemana;
-import com.barbearia.Service.ColaboradorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.barbershop.barber.Model.DiaDaSemana;
+import br.com.barbershop.barber.Service.ColaboradorService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ public class ColaboradorController {
 
     private final ColaboradorService colaboradorService;
 
-    @Autowired
+    
     public ColaboradorController(ColaboradorService colaboradorService) {
         this.colaboradorService = colaboradorService;
     }
