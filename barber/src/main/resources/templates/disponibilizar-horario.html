@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Disponibilizar Horários</title>
+</head>
+<body>
+  <h1>Disponibilizar Horários</h1>
+
+  <form action="/colaborador/disponibilizar/confirmar" method="post">
+    <input type="hidden" name="colaboradorId" th:value="${colaborador.id}">
+    <h2>Segunda</h2>
+    <div th:each="horario : ${horariosSegunda}">
+      <label>
+        <input type="checkbox" name="horarios" th:value="'SEGUNDA-' + ${horario}">
+        <span th:text="${horario}"></span>
+      </label><br>
+    </div>
+
+    <h2>Terça</h2>
+    <div th:each="horario : ${horariosTerca}">
+      <label>
+        <input type="checkbox" name="horarios" th:value="'TERÇA-' + ${horario}">
+        <span th:text="${horario}"></span>
+      </label><br>
+    </div>
+
+    <h2>Quarta</h2>
+    <div th:each="horario : ${horariosQuarta}">
+      <label>
+        <input type="checkbox" name="horarios" th:value="'QUARTA-' + ${horario}">
+        <span th:text="${horario}"></span>
+      </label><br>
+    </div>
+
+    <h2>Quinta</h2>
+    <div th:each="horario : ${horariosQuinta}">
+      <label>
+        <input type="checkbox" name="horarios" th:value="'QUINTA-' + ${horario}">
+        <span th:text="${horario}"></span>
+      </label><br>
+    </div>
+
+    <h2>Sexta</h2>
+    <div th:each="horario : ${horariosSexta}">
+      <label>
+        <input type="checkbox" name="horarios" th:value="'SEXTA-' + ${horario}">
+        <span th:text="${horario}"></span>
+      </label><br>
+    </div>
+
+    <br>
+    <button type="submit">Confirmar</button>
+  </form>
+</body>
+</html>
