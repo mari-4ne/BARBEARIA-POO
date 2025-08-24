@@ -73,7 +73,7 @@ public class ColaboradorController {
 
         // Criar listas de horários por dia da semana
         var segunda = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.SEGUNDA);
-        var terca = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.TERÇA);
+        var terca = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.TERCA);
         var quarta = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.QUARTA);
         var quinta = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.QUINTA);
         var sexta = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.SEXTA);
@@ -110,7 +110,7 @@ public class ColaboradorController {
 
         // Horários disponíveis
         var segundaDisponiveis = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.SEGUNDA);
-        var tercaDisponiveis = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.TERÇA);
+        var tercaDisponiveis = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.TERCA);
         var quartaDisponiveis = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.QUARTA);
         var quintaDisponiveis = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.QUINTA);
         var sextaDisponiveis = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.SEXTA);
@@ -155,7 +155,7 @@ public class ColaboradorController {
 
         // Buscar horários disponíveis por dia da semana
         var segunda = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.SEGUNDA);
-        var terca = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.TERÇA);
+        var terca = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.TERCA);
         var quarta = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.QUARTA);
         var quinta = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.QUINTA);
         var sexta = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.SEXTA);
