@@ -20,6 +20,15 @@ public class ListaColaboradores {
         COLABORADORES = Collections.unmodifiableList(colaboradores);
     }
 
+    //método para autenticar o login do colaborador
+    public static Colaborador autenticar(String login, String senha) {
+        return ListaColaboradores.getColaboradores()
+                .stream()
+                .filter(c -> c.getNome().equalsIgnoreCase(login) && c.getSenha().equals(senha))
+                .findFirst()
+                .orElse(null);
+    }
+
     public static List<Colaborador> getColaboradores() {
         return COLABORADORES;
     }
