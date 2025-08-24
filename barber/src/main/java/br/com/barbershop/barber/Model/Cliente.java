@@ -9,6 +9,8 @@ public class Cliente {
         this.telefone = telefone;
     }
 
+//construtor vazio
+public Cliente() {}
 
 //getters
 public String getNome() {
@@ -17,5 +19,14 @@ public String getNome() {
 
 public String getTelefone() {
     return telefone;
+}
+
+//setters
+public void setNome(String nome) {
+    this.nome = nome;
+}
+
+public void setTelefone(String telefone) {
+    this.telefone = telefone;
 }
 }

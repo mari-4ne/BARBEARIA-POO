@@ -21,6 +21,12 @@ public class Colaborador {
         inicializarDisponibilidadePadrao();
     }
 
+    //construtor vazio
+    public Colaborador() {
+        this.disponibilidade = new HashMap<>();
+        inicializarDisponibilidadePadrao();
+    }
+
     //inicializar a disponibilidade com horários padrão
     private void inicializarDisponibilidadePadrao() {
         // Horários "

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -28,18 +27,28 @@
                         <span th:text="${#strings.capitalize(agendamento.dia.name().toLowerCase())}">Dia da Semana</span>
                     </div>
                 </div>
+                <div class="summary-item" th:if="${agendamento.dataHora != null}">
+                    <p>DATA E HORÁRIO:</p>
+                    <div class="value">
+                        <span th:text="${#temporals.format(agendamento.dataHora, 'dd/MM/yyyy HH:mm')}"></span>
+                    </div>
+                </div>
             </div>
-               <div class="options-section">
-                   <h2>HORÁRIOS DISPONIVEIS:</h2>
-                   <div class="options-box time-grid">
-                      <form th:action="@{/agendamento/passo3-horario}" method="post">
-                           <button type="submit" name="horario" th:each="h : ${horariosDisponiveis}"
-                             th:value="${h}" th:text="${h}" class="choice-btn">
-                           </button>
-                      </form>
-                  </div>
-              </div>          
-        </main>
+<body>
+    <div class="container">
+        <div class="options-section">
+            <h2>ESCOLHA O TIPO DE CORTE:</h2>
+            <div class="choice-list">
+                <form th:action="@{/agendamento/passo5-tipo-corte}" method="post">
+                    <button type="submit" name="corteEscolhido"
+                            th:each="corte : ${tiposDeCorte}"
+                            th:value="${corte.getEstilo()}"
+                            th:text="${corte.getEstilo() + ' - R$ ' + corte.getPreco()}"
+                            class="choice-btn">
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -15,7 +15,9 @@
             <div class="options-section">
                 <h2>ESCOLHA O SEU BARBEIRO:</h2>
                 
-                <form th:action="@{/agendamento/passo2}" method="post" class="choice-list">
+                <form th:action="@{/agendamento/passo1-barbeiro}" method="post" class="choice-list">
+
+
                     <div th:each="colab : ${colaboradores}">
                         <button type="submit" name="colaboradorId" th:value="${colab.id}" class="choice-btn">
                             <span class="icon"></span>

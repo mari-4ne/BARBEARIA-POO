@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmação do Agendamento</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><span>CONFIRMAÇÃO</span></h1>
+        </header>
+
+        <main class="step-content">
+            <form th:action="@{/agendamento/salvar}" th:object="${agendamento}" method="post">
+
+                <div class="summary-section confirmation-summary">
+                    <h2>RESUMO DO SEU AGENDAMENTO:</h2>
+                    <div class="summary-item" th:if="*{colaborador != null}">
+                        <p>BARBEIRO:</p>
+                        <div class="value">
+                            <span th:text="*{colaborador.nome}">Nome do Colaborador</span>
+                        </div>
+                    </div>
+                    <div class="summary-item" th:if="*{dataHora != null}">
+                        <p>DATA E HORÁRIO:</p>
+                        <div class="value">
+                            <span th:text="${#temporals.format(agendamento.dataHora, 'dd/MM/yyyy HH:mm')}">Data e Horário</span>
+                        </div>
+                    </div>
+                    <div class="summary-item" th:if="*{corteDesejado != null}">
+                        <p>SERVIÇO ESCOLHIDO:</p>
+                        <div class="value">
+                            <span th:text="*{corteDesejado}">Serviço</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="options-section client-details">
+                    <h2>SEUS DADOS:</h2>
+                    <div class="form-group">
+                        <label for="nomeCliente">Seu Nome:</label>
+                        <input type="text" id="nomeCliente" th:field="*{cliente.nome}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefoneCliente">Seu Telefone:</label>
+                        <input type="tel" id="telefoneCliente" th:field="*{cliente.telefone}" required>
+                    </div>
+                </div>
+
+                <div class="confirmation-action">
+                    <button type="submit" class="choice-btn confirm-btn">
+                        CONFIRMAR AGENDAMENTO
+                    </button>
+                </div>
+
+            </form>
+        </main>
+    </div>
+</body>
+</html>

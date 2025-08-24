@@ -28,17 +28,28 @@
                         <span th:text="${#strings.capitalize(agendamento.dia.name().toLowerCase())}">Dia da Semana</span>
                     </div>
                 </div>
+                <div class="summary-item" th:if="${agendamento.dataHora != null}">
+                    <p>DATA E HORÁRIO:</p>
+                    <div class="value">
+                        <span th:text="${#temporals.format(agendamento.dataHora, 'dd/MM/yyyy HH:mm')}"></span>
+                    </div>
+                </div>
             </div>
-               <div class="options-section">
-                   <h2>HORÁRIOS DISPONIVEIS:</h2>
-                   <div class="options-box time-grid">
-                      <form th:action="@{/agendamento/passo3-horario}" method="post">
-                           <button type="submit" name="horario" th:each="h : ${horariosDisponiveis}"
-                             th:value="${h}" th:text="${h}" class="choice-btn">
-                           </button>
-                      </form>
-                  </div>
-              </div>          
+              <div class="options-section">
+                <h2>ESCOLHA O SERVIÇO:</h2>
+                <div class="choice-list">
+                    <form th:action="@{/agendamento/processar-passo4-servico}" method="post">
+                        
+                        <button type="submit" name="servicoEscolhido" value="CABELO" class="choice-btn">
+                            <span>Cabelo</span>
+                        </button>
+
+                        <button type="submit" name="servicoEscolhido" value="BARBA" class="choice-btn">
+                            <span>Barba</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
         </main>
     </div>
 </body>

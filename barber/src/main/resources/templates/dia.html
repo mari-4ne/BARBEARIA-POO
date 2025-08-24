@@ -8,7 +8,8 @@
 <body>
     <div class="container">
         <header>
-             </header>
+            <h1><span>AGENDAMENTO</span></h1>
+        </header>
 
         <main class="step-content">
             <div class="summary-section">
@@ -23,8 +24,8 @@
             <div class="options-section">
                 <h2>DIAS DISPONIVEIS:</h2>
                 <div class="options-box day-list">
-                    <form th:action="@{/agendamento/passo3}" method="post">
-                        <div th:each="dia : ${diasDaSemana}" th:if="${dia.name() != 'SABADO' and dia.name() != 'DOMINGO'}">
+                   <form th:action="@{/agendamento/passo2-dia}" method="post">
+                        <div th:each="dia : ${diasDisponiveis}" th:if="${dia.name() != 'SABADO' and dia.name() != 'DOMINGO'}">
                             <button type="submit" name="dia" th:value="${dia.name()}" class="choice-btn"
                                     th:text="${dia.name().substring(0,1) + dia.name().substring(1).toLowerCase()}">
                                 Dia da Semana
