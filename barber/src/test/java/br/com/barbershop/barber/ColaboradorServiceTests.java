@@ -8,7 +8,7 @@ import br.com.barbershop.barber.Service.ColaboradorService;
 public class ColaboradorServiceTests {
 
     private ColaboradorService colaboradorService = new ColaboradorService();
-    private Colaborador colaborador = new Colaborador(1, "emanuel", "123456");
+    private Colaborador colaborador = new Colaborador(6, "gabriel", "1234568");
 
 
     @Test
