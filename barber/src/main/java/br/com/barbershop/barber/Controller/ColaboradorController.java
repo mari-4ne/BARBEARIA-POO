@@ -1,5 +1,6 @@
 package br.com.barbershop.barber.Controller;
 
+import br.com.barbershop.barber.Model.Colaborador;
 import br.com.barbershop.barber.Model.DiaDaSemana;
 import br.com.barbershop.barber.Service.ColaboradorService;
 import br.com.barbershop.barber.Service.ListaColaboradores;
@@ -11,6 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.Comparator;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.util.List;
 
 @Controller
 @RequestMapping("/colaborador")
@@ -21,6 +26,23 @@ public class ColaboradorController {
     public ColaboradorController(ColaboradorService colaboradorService) {
         this.colaboradorService = colaboradorService;
     }
+
+    private Colaborador autenticarViaJson(String nome, String senha) {
+    try {
+       File jsonFile = new File("colaboradores.json"); // caminho do json
+        ObjectMapper mapper = new ObjectMapper();
+        List<Colaborador> colaboradores = mapper.readValue(jsonFile, new TypeReference<List<Colaborador>>() {});
+
+        return colaboradores.stream()
+                .filter(c -> c.getNome().equalsIgnoreCase(nome) && c.getSenha().equals(senha))
+                .findFirst()
+                .orElse(null);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+    }
+}
 
     @GetMapping("/login-colaborador")
     public String loginColaborador() {
@@ -33,7 +55,7 @@ public class ColaboradorController {
             Model model) {
 
         // validação simples
-        var colaborador = ListaColaboradores.autenticar(login, password);
+       var colaborador = autenticarViaJson(login, password);
         model.addAttribute("colaborador", colaborador);
 
         if (colaborador != null) {
