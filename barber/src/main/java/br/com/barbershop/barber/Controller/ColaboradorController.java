@@ -173,28 +173,36 @@ public class ColaboradorController {
         return "indisponibilizar-horario"; // Thymeleaf vai montar a página
     }
 
-    @PostMapping("/indisponibilizar/confirmar") // volta pra pagina da agenda com os horarios
-    public String confirmarIndisponibilidade(
-            @RequestParam int colaboradorId,
-            @RequestParam("horarios") List<String> horarios) {
+    @PostMapping("/indisponibilizar/confirmar")
+public String confirmarIndisponibilidade(
+        @RequestParam int colaboradorId,
+        @RequestParam(value = "horarios", required = false) List<String> horarios) {
 
+    if (horarios != null && !horarios.isEmpty()) {
         for (String h : horarios) {
             // exemplo: "Segunda-08:00"
             String[] partes = h.split("-");
             String dia = partes[0];
             String hora = partes[1];
 
-            colaboradorService.removerHorarioDisponivel(colaboradorId, DiaDaSemana.valueOf(dia.toUpperCase()), hora);
+            colaboradorService.removerHorarioDisponivel(
+                    colaboradorId,
+                    DiaDaSemana.valueOf(dia.toUpperCase()),
+                    hora
+            );
         }
-
-        return "redirect:/colaborador/agenda-colaborador/" + colaboradorId;
     }
 
-    @PostMapping("/disponibilizar/confirmar") // volta pra página da agenda com os horários
-    public String confirmarDisponibilidade(
-            @RequestParam int colaboradorId,
-            @RequestParam("horarios") List<String> horarios) {
+    // sempre redireciona para a agenda, mesmo se não tiver horários
+    return "redirect:/colaborador/agenda-colaborador/" + colaboradorId;
+}
 
+   @PostMapping("/disponibilizar/confirmar")
+public String confirmarDisponibilidade(
+        @RequestParam int colaboradorId,
+        @RequestParam(value = "horarios", required = false) List<String> horarios) {
+
+    if (horarios != null && !horarios.isEmpty()) {
         for (String h : horarios) {
             // exemplo: "Segunda-08:00"
             String[] partes = h.split("-");
@@ -204,10 +212,12 @@ public class ColaboradorController {
             colaboradorService.adicionarHorarioDisponivel(
                     colaboradorId,
                     DiaDaSemana.valueOf(dia.toUpperCase()),
-                    hora);
+                    hora
+            );
         }
-
-        return "redirect:/colaborador/agenda-colaborador/" + colaboradorId;
     }
+
+    return "redirect:/colaborador/agenda-colaborador/" + colaboradorId;
+}
 
 }
