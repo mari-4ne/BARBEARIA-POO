@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #1a0e06, #000);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 95%;
+    max-width: 900px;
+    text-align: center;
+}
+
+/* ======== Cabeçalho ======== */
+header {
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #E6A15C;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+}
+
+header h1 span {
+    border-bottom: 2px solid #E6A15C;
+    padding-bottom: 4px;
+}
+
+/* ======== Conteúdo principal ======== */
+.step-content {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+}
+
+/* ======== Resumo ======== */
+.summary-section {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.summary-item p {
+    margin: 0;
+    font-weight: bold;
+    color: #E6A15C;
+}
+
+.summary-item .value {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.summary-item .icon {
+    width: 28px;
+    height: 28px;
+    background: url('/img/barber-icon.png') no-repeat center;
+    background-size: contain;
+    display: inline-block;
+}
+
+/* ======== Seção de opções ======== */
+.options-section h2 {
+    color: #E6A15C;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* ======== Grid de horários ======== */
+.options-box.time-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Botões dos horários */
+.choice-btn {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 12px;
+    background: #b97a4a;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.choice-btn:hover {
+    background: #E6A15C;
+    transform: scale(1.05);
+}
+
+/* ======== Responsividade ======== */
+@media (max-width: 600px) {
+    .options-box.time-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+    }
+
+    .choice-btn {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+
+    .summary-item {
+        text-align: center;
+    }
+}
