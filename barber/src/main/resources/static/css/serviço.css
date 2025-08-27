@@ -1,0 +1,125 @@
+/* ======== Estilo base ======== */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #1a0e06, #000);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 95%;
+    max-width: 900px;
+    text-align: center;
+}
+
+/* ======== Cabeçalho ======== */
+header {
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #E6A15C;
+    text-shadow: 0 0 8px rgba(0,0,0,0.8);
+}
+
+header h1 span {
+    border-bottom: 2px solid #E6A15C;
+    padding-bottom: 4px;
+}
+
+/* ======== Conteúdo principal ======== */
+.step-content {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+}
+
+/* ======== Resumo ======== */
+.summary-section {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.summary-item p {
+    margin: 0;
+    font-weight: bold;
+    color: #E6A15C;
+}
+
+.summary-item .value {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.summary-item .icon {
+    width: 28px;
+    height: 28px;
+    background: url('/img/barber-icon.png') no-repeat center;
+    background-size: contain;
+    display: inline-block;
+}
+
+/* ======== Seção de opções ======== */
+.options-section h2 {
+    color: #E6A15C;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* ======== Lista de serviços ======== */
+.choice-list {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Botões de serviços como cards */
+.choice-btn {
+    flex: 1 1 200px;
+    padding: 20px;
+    border: none;
+    border-radius: 15px;
+    background: #b97a4a;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    min-width: 150px;
+}
+
+.choice-btn:hover {
+    background: #E6A15C;
+    transform: scale(1.05);
+}
+
+/* ======== Responsividade ======== */
+@media (max-width: 600px) {
+    .choice-list {
+        flex-direction: column;
+        gap: 15px;
+         background: #E6A15C;
+    }
+
+    .choice-btn {
+        font-size: 1rem;
+        padding: 15px;
+        width: 100%;
+    }
+}
