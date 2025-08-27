@@ -4,6 +4,7 @@ import br.com.barbershop.barber.Model.Colaborador;
 import br.com.barbershop.barber.Model.DiaDaSemana;
 import br.com.barbershop.barber.Service.ColaboradorService;
 import br.com.barbershop.barber.Service.ListaColaboradores;
+import br.com.barbershop.barber.Service.AgendamentoService;
 
 import java.util.List;
 
@@ -22,27 +23,30 @@ import java.util.List;
 public class ColaboradorController {
 
     private final ColaboradorService colaboradorService;
+    private final AgendamentoService agendamentoService;
 
-    public ColaboradorController(ColaboradorService colaboradorService) {
+    public ColaboradorController(ColaboradorService colaboradorService, AgendamentoService agendamentoService) {
         this.colaboradorService = colaboradorService;
+        this.agendamentoService = agendamentoService;
     }
 
     private Colaborador autenticarViaJson(String nome, String senha) {
-    try {
-       File jsonFile = new File("colaboradores.json"); // caminho do json
-        ObjectMapper mapper = new ObjectMapper();
-        List<Colaborador> colaboradores = mapper.readValue(jsonFile, new TypeReference<List<Colaborador>>() {});
+        try {
+            File jsonFile = new File("colaboradores.json"); // caminho do json
+            ObjectMapper mapper = new ObjectMapper();
+            List<Colaborador> colaboradores = mapper.readValue(jsonFile, new TypeReference<List<Colaborador>>() {
+            });
 
-        return colaboradores.stream()
-                .filter(c -> c.getNome().equalsIgnoreCase(nome) && c.getSenha().equals(senha))
-                .findFirst()
-                .orElse(null);
+            return colaboradores.stream()
+                    .filter(c -> c.getNome().equalsIgnoreCase(nome) && c.getSenha().equals(senha))
+                    .findFirst()
+                    .orElse(null);
 
-    } catch (Exception e) {
-        e.printStackTrace();
-        return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-}
 
     @GetMapping("/login-colaborador")
     public String loginColaborador() {
@@ -55,7 +59,7 @@ public class ColaboradorController {
             Model model) {
 
         // validação simples
-       var colaborador = autenticarViaJson(login, password);
+        var colaborador = autenticarViaJson(login, password);
         model.addAttribute("colaborador", colaborador);
 
         if (colaborador != null) {
@@ -87,36 +91,6 @@ public class ColaboradorController {
 
         colaboradorService.adicionarHorarioDisponivel(colaboradorId, dia, horario);
         return ResponseEntity.ok("Horário adicionado com sucesso");
-    }
-
-    @GetMapping("/agenda-colaborador/{id}")
-    public String gerenciarHorarios(@PathVariable int id, Model model) {
-        var colaborador = colaboradorService.buscarPorId(id).orElse(null);
-
-        // Criar listas de horários por dia da semana
-        var segunda = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.SEGUNDA);
-        var terca = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.TERCA);
-        var quarta = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.QUARTA);
-        var quinta = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.QUINTA);
-        var sexta = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.SEXTA);
-
-        segunda.sort(Comparator.naturalOrder());
-        terca.sort(Comparator.naturalOrder());
-        quarta.sort(Comparator.naturalOrder());
-        quinta.sort(Comparator.naturalOrder());
-        sexta.sort(Comparator.naturalOrder());
-
-        // adicionar no Model para Thymeleaf
-        model.addAttribute("colaborador", colaborador);
-        model.addAttribute("diasDaSemana", DiaDaSemana.values());
-
-        model.addAttribute("horariosSegunda", segunda);
-        model.addAttribute("horariosTerca", terca);
-        model.addAttribute("horariosQuarta", quarta);
-        model.addAttribute("horariosQuinta", quinta);
-        model.addAttribute("horariosSexta", sexta);
-
-        return "agenda-colaborador";
     }
 
     @GetMapping("/disponibilizar-horario/{id}")
@@ -182,6 +156,14 @@ public class ColaboradorController {
         var quinta = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.QUINTA);
         var sexta = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.SEXTA);
 
+        // Ordena a lista de horários para cada dia
+
+        segunda.sort(Comparator.naturalOrder());
+        terca.sort(Comparator.naturalOrder());
+        quarta.sort(Comparator.naturalOrder());
+        quinta.sort(Comparator.naturalOrder());
+        sexta.sort(Comparator.naturalOrder());
+
         // Enviar para view
         model.addAttribute("colaborador", colaborador);
         model.addAttribute("diasDaSemana", DiaDaSemana.values());
@@ -196,50 +178,92 @@ public class ColaboradorController {
     }
 
     @PostMapping("/indisponibilizar/confirmar")
-public String confirmarIndisponibilidade(
-        @RequestParam int colaboradorId,
-        @RequestParam(value = "horarios", required = false) List<String> horarios) {
+    public String confirmarIndisponibilidade(
+            @RequestParam int colaboradorId,
+            @RequestParam(value = "horarios", required = false) List<String> horarios) {
 
-    if (horarios != null && !horarios.isEmpty()) {
-        for (String h : horarios) {
-            // exemplo: "Segunda-08:00"
-            String[] partes = h.split("-");
-            String dia = partes[0];
-            String hora = partes[1];
+        if (horarios != null && !horarios.isEmpty()) {
+            for (String h : horarios) {
+                String[] partes = h.split("-");
+                String dia = partes[0];
+                String hora = partes[1];
 
-            colaboradorService.removerHorarioDisponivel(
-                    colaboradorId,
-                    DiaDaSemana.valueOf(dia.toUpperCase()),
-                    hora
-            );
+                colaboradorService.removerHorarioDisponivel(
+                        colaboradorId,
+                        DiaDaSemana.valueOf(dia.toUpperCase()),
+                        hora);
+            }
         }
+
+        // sempre redireciona para a agenda, mesmo se não tiver horários
+        return "redirect:/colaborador/agenda-colaborador/" + colaboradorId;
     }
 
-    // sempre redireciona para a agenda, mesmo se não tiver horários
-    return "redirect:/colaborador/agenda-colaborador/" + colaboradorId;
-}
+    @PostMapping("/disponibilizar/confirmar")
+    public String confirmarDisponibilidade(
+            @RequestParam int colaboradorId,
+            @RequestParam(value = "horarios", required = false) List<String> horarios) {
 
-   @PostMapping("/disponibilizar/confirmar")
-public String confirmarDisponibilidade(
-        @RequestParam int colaboradorId,
-        @RequestParam(value = "horarios", required = false) List<String> horarios) {
+        if (horarios != null && !horarios.isEmpty()) {
+            for (String h : horarios) {
+                String[] partes = h.split("-");
+                String dia = partes[0];
+                String hora = partes[1];
 
-    if (horarios != null && !horarios.isEmpty()) {
-        for (String h : horarios) {
-            // exemplo: "Segunda-08:00"
-            String[] partes = h.split("-");
-            String dia = partes[0];
-            String hora = partes[1];
-
-            colaboradorService.adicionarHorarioDisponivel(
-                    colaboradorId,
-                    DiaDaSemana.valueOf(dia.toUpperCase()),
-                    hora
-            );
+                colaboradorService.adicionarHorarioDisponivel(
+                        colaboradorId,
+                        DiaDaSemana.valueOf(dia.toUpperCase()),
+                        hora);
+            }
         }
+
+        return "redirect:/colaborador/agenda-colaborador/" + colaboradorId;
     }
 
-    return "redirect:/colaborador/agenda-colaborador/" + colaboradorId;
-}
+    @GetMapping("/agenda-colaborador/{id}")
+    public String gerenciarHorarios(@PathVariable int id, Model model) {
+        var colaborador = colaboradorService.buscarPorId(id).orElse(null);
+
+        // Definir a lista mestre de todos os horários de trabalho
+        var todosOsHorarios = java.util.Arrays.asList(
+                "08:00", "08:30", "09:00", "09:30",
+                "10:00", "10:30", "11:00", "13:00",
+                "13:30", "14:00", "14:30", "15:00",
+                "15:30", "16:00");
+
+        // Buscar horários disponíveis (como já estava)
+        var segundaDisponiveis = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.SEGUNDA);
+        var tercaDisponiveis = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.TERCA);
+        var quartaDisponiveis = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.QUARTA);
+        var quintaDisponiveis = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.QUINTA);
+        var sextaDisponiveis = colaboradorService.getHorariosDoColaborador(id, DiaDaSemana.SEXTA);
+
+        // Buscar horários já agendados (ocupados)
+        var segundaAgendados = agendamentoService.getHorariosAgendados(id, DiaDaSemana.SEGUNDA);
+        var tercaAgendados = agendamentoService.getHorariosAgendados(id, DiaDaSemana.TERCA);
+        var quartaAgendados = agendamentoService.getHorariosAgendados(id, DiaDaSemana.QUARTA);
+        var quintaAgendados = agendamentoService.getHorariosAgendados(id, DiaDaSemana.QUINTA);
+        var sextaAgendados = agendamentoService.getHorariosAgendados(id, DiaDaSemana.SEXTA);
+
+        // Enviar todas as listas para a view
+        model.addAttribute("colaborador", colaborador);
+        model.addAttribute("todosOsHorarios", todosOsHorarios); // Envia a lista completa
+
+        // Envia listas de horários disponíveis
+        model.addAttribute("horariosSegunda", segundaDisponiveis);
+        model.addAttribute("horariosTerca", tercaDisponiveis);
+        model.addAttribute("horariosQuarta", quartaDisponiveis);
+        model.addAttribute("horariosQuinta", quintaDisponiveis);
+        model.addAttribute("horariosSexta", sextaDisponiveis);
+
+        // Envia listas de horários agendados
+        model.addAttribute("horariosSegundaAgendados", segundaAgendados);
+        model.addAttribute("horariosTercaAgendados", tercaAgendados);
+        model.addAttribute("horariosQuartaAgendados", quartaAgendados);
+        model.addAttribute("horariosQuintaAgendados", quintaAgendados);
+        model.addAttribute("horariosSextaAgendados", sextaAgendados);
+
+        return "agenda-colaborador";
+    }
 
 }
