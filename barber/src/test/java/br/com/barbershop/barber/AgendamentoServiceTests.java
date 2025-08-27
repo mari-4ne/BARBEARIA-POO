@@ -1,5 +1,4 @@
-
- package br.com.barbershop.barber;
+package br.com.barbershop.barber;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,36 +7,45 @@ import br.com.barbershop.barber.Model.Agendamento;
 import br.com.barbershop.barber.Model.Colaborador;
 import br.com.barbershop.barber.Service.AgendamentoService;
 import br.com.barbershop.barber.Service.ColaboradorService;
-import br.com.barbershop.barber.Service.AgendamentoService;
+
 import java.time.LocalDateTime;
 
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import static org.mockito.Mockito.verify;
+
+@ExtendWith(MockitoExtension.class)
 public class AgendamentoServiceTests {
 
+    @Mock
+    private ColaboradorService colaboradorService; // Objeto FALSO
 
+    @InjectMocks
+    private AgendamentoService agendamentoService; // Objeto REAL com o falso injetado
 
-    private AgendamentoService agendamentoService;
-    private ColaboradorService colaboradorService;
-    private Agendamento agendamento;
+    @Test
+    void deveAgendarClienteComSucesso() {
 
-  @Test
-void deveAgendarClienteComSucesso() {
-    colaboradorService = new ColaboradorService();
-    agendamentoService = new AgendamentoService(colaboradorService);
+        // Criado objetos de mentira apenas para o teste
 
-    // cria colaborador
-    Colaborador colaborador = new Colaborador(5, "Emanuel", "123456");
-    colaboradorService.adicionarColaborador(colaborador);
+        Colaborador colaboradorFalso = new Colaborador(5, "Emanuel", "123456");
+        Agendamento novoAgendamento = new Agendamento();
+        novoAgendamento.setColaborador(colaboradorFalso);
+        novoAgendamento.setDataHora(LocalDateTime.of(2025, 8, 25, 14, 0));
 
-    // cria agendamento e associa colaborador + data/hora
-    agendamento = new Agendamento();
-    agendamento.setColaborador(colaborador);
-    agendamento.setDataHora(LocalDateTime.of(2025, 8, 25, 14, 0)); // exemplo: hoje às 14h
+        // Executa o método que queremos testar
+        agendamentoService.agendar(novoAgendamento);
 
-    // executa o agendamento
-    agendamentoService.agendar(agendamento);
+        // Valida se o estado do objeto está correto
+        assertEquals(colaboradorFalso, novoAgendamento.getColaborador());
+        assertNotNull(novoAgendamento.getDataHora());
 
-    // valida se o agendamento foi registrado com sucesso
-    assertEquals(colaborador, agendamento.getColaborador());
-    assertNotNull(agendamento.getDataHora()); // garante que tem data
-}
+        // Também podemos verificar se o agendamentoService "conversou" com o
+        // colaboradorService
+        // para remover o horário disponível.
+        verify(colaboradorService).removerHorarioDisponivel(5, br.com.barbershop.barber.Model.DiaDaSemana.SEGUNDA,
+                "14:00");
+    }
 }
