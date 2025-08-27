@@ -1,0 +1,89 @@
+/* Fundo */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to bottom, #1a0e06, #000);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Container principal */
+.agenda-container {
+  text-align: center;
+  width: 95%;
+  max-width: 1200px;
+}
+
+/* Título */
+.agenda-container h1 {
+  color: #E6A15C;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+/* Layout semana */
+.semana {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+/* Cada dia */
+.dia {
+  background: #b97a4a;
+  border-radius: 15px;
+  padding: 15px 20px;
+  width: 160px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* Nome do dia */
+.dia h2 {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+/* Lista de horários */
+.dia ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dia li {
+  font-size: 1rem;
+  color: #fff; /* sempre branco */
+  margin: 5px 0;
+}
+
+/* Container dos botões */
+.botao-container {
+  margin-bottom: 40px;  /* Espaço entre botões e os cards */
+  position: relative;
+  z-index: 10; /* força ficar na frente */
+}
+
+
+.button {
+  margin-top: 10px;
+  margin-bottom: 100px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #E6A15C;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+ .button:hover {
+  background: #ffb870;
+}
