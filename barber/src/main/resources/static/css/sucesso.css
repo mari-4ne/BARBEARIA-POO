@@ -1,0 +1,116 @@
+/* ======== Estilo base ======== */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #1a0e06, #000);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 95%;
+    max-width: 700px;
+    text-align: center;
+}
+
+/* ======== Cabeçalho ======== */
+header {
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #E6A15C;
+    text-shadow: 0 0 10px rgba(230,161,92,0.8);
+    margin: 0;
+}
+
+header h1 span {
+    border-bottom: 2px solid #E6A15C;
+    padding-bottom: 4px;
+}
+
+/* ======== Conteúdo principal ======== */
+.step-content {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 0 18px rgba(0,0,0,0.6);
+}
+
+.summary-section h2 {
+    font-size: 1.6rem;
+    color: #E6A15C;
+    margin-bottom: 15px;
+    text-shadow: 0 0 8px rgba(0,0,0,0.7);
+}
+
+.summary-section p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* ======== Botão voltar ======== */
+.choice-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 22px;
+    border: none;
+    border-radius: 15px;
+    background: #b97a4a;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    text-decoration: none;
+    min-width: 220px;
+}
+
+.choice-btn:hover {
+    background: #E6A15C;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(230,161,92,0.8);
+}
+
+/* ======== Animação de sucesso ======== */
+@keyframes glow {
+    0% { text-shadow: 0 0 5px #E6A15C, 0 0 10px #b97a4a; }
+    50% { text-shadow: 0 0 15px #E6A15C, 0 0 25px #b97a4a; }
+    100% { text-shadow: 0 0 5px #E6A15C, 0 0 10px #b97a4a; }
+}
+
+header h1 {
+    animation: glow 2s infinite ease-in-out;
+}
+
+.notice {
+    margin-top: 12px;
+    font-size: 0.95rem;
+    opacity: 0.85;
+    color: #ccc;
+}
+/* ======== Responsividade ======== */
+@media (max-width: 600px) {
+    .step-content {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    .summary-section h2 {
+        font-size: 1.3rem;
+    }
+
+    .choice-btn {
+        width: 100%;
+        font-size: 1rem;
+    }
+}
