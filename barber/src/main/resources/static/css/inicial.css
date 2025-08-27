@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@700&display=swap');
 
-/* Estilos gerais */
 body, html {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
     font-family: 'Roboto', sans-serif;
-    color: #E6A15C; /* Cor principal do texto e ícones */
-    overflow: hidden; /* Evita barras de rolagem */
+    color: #E6A15C; 
+    overflow-x: hidden; /* Evita barras de rolagem */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 /* Camada escura sobre a imagem de fundo */
@@ -18,8 +18,8 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('Fundo-Paginainicial.png') no-repeat center center/cover;
-    filter: brightness(0.3) blur(3px); /* Escurece e desfoca a imagem */
+    background: url('../imagens/Fundo-Pagianinical.png') no-repeat center center/cover;
+    filter: brightness(0.6); 
     z-index: -1;
 }
 
@@ -60,7 +60,7 @@ header h1 {
     flex-wrap: wrap; /* Permite que os itens quebrem a linha em telas menores */
 }
 
-/* NOVO: Estilo para a tag <a> que funciona como link/botão */
+
 .option-link {
     text-decoration: none; /* Remove o sublinhado do link */
     color: inherit; /* Faz o link herdar a cor do elemento pai */
@@ -94,7 +94,10 @@ header h1 {
     font-size: 1.5rem;
     font-weight: 700;
 }
-
+.voltar-button {
+ background-color: aliceblue;
+ color: black;
+}
 
 @media (max-width: 768px) {
     header h1 {
@@ -114,3 +117,5 @@ header h1 {
         font-size: 3rem;
     }
 }
+
+
