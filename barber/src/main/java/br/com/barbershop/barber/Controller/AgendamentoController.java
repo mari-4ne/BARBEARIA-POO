@@ -51,6 +51,7 @@ public class AgendamentoController {
     @GetMapping("/passo1-barbeiro")
     public String mostrarPasso1(Model model) {
         List<Colaborador> colaboradores = colaboradorService.listarTodosColaboradores();
+       
         model.addAttribute("colaboradores", colaboradores);
         return "barbeiro"; //arquivo barbeiro.html
     }
@@ -64,25 +65,26 @@ public class AgendamentoController {
     }
 
     //passo 2
-     @GetMapping("/passo2-dia")
-    public String mostrarPasso2(@ModelAttribute("agendamento") Agendamento agendamento, Model model) {
-        if (agendamento.getColaborador() == null) {
-            return "redirect:/agendamento/passo1-barbeiro"; //redireciona se o barbeiro não estiver selecionado
-        }
-
-           
-          Colaborador colaboradorEscolhido = agendamento.getColaborador();
-          //filtra os dias disponiveis em uma nova lists
-          List<DiaDaSemana> diasDisponiveis = colaboradorEscolhido.getDisponibilidade().entrySet().stream()
-            .filter(entry -> !entry.getValue().isEmpty()) 
-            .map(entry -> entry.getKey())                
-            .collect(Collectors.toList());                
-
-   
-        model.addAttribute("diasDisponiveis", diasDisponiveis);
-        //model.addAttribute("diasDaSemana", DiaDaSemana.values());
-        return "dia"; // arquivo dia.html
+    @GetMapping("/passo2-dia")
+public String mostrarPasso2(@ModelAttribute("agendamento") Agendamento agendamento, Model model) {
+    if (agendamento.getColaborador() == null) {
+        return "redirect:/agendamento/passo1-barbeiro"; //redireciona se o barbeiro não estiver selecionado
     }
+
+    Colaborador colaboradorEscolhido = agendamento.getColaborador();
+    //filtra os dias disponiveis em uma nova lista
+    List<DiaDaSemana> diasDisponiveis = colaboradorEscolhido.getDisponibilidade().entrySet().stream()
+        .filter(entry -> !entry.getValue().isEmpty())
+        .map(entry -> entry.getKey())
+  
+        // Ordena os dias da semana
+        .sorted()
+       
+        .collect(Collectors.toList());
+
+    model.addAttribute("diasDisponiveis", diasDisponiveis);
+    return "dia"; // arquivo dia.html
+}
 
     @PostMapping("/passo2-dia")
     public String processarPasso2(@RequestParam("dia") DiaDaSemana dia, @ModelAttribute("agendamento") Agendamento agendamento) {
@@ -91,24 +93,27 @@ public class AgendamentoController {
     }
 
     //passo 3
-    @GetMapping("/passo3-horario")
-    public String mostrarPasso3(@ModelAttribute("agendamento") Agendamento agendamento, Model model) {
-        if (agendamento.getDia() == null) {
-            return "redirect:/agendamento/passo2-dia";
-        }
-  
+   @GetMapping("/passo3-horario")
+public String mostrarPasso3(@ModelAttribute("agendamento") Agendamento agendamento, Model model) {
+    if (agendamento.getDia() == null) {
+        return "redirect:/agendamento/passo2-dia";
+    }
+
     Colaborador colaboradorEscolhido = agendamento.getColaborador();
     DiaDaSemana diaEscolhido = agendamento.getDia();
 
-    // filtra os horarios disponiveis para o dia e colaborador
+    // Busca os horarios disponiveis para o dia e colaborador
     List<String> horarios = colaboradorService.getHorariosDoColaborador(colaboradorEscolhido.getId(), diaEscolhido);
 
+    
+    //Ordena a lista de horários
+    horarios.sort(null);
+    
 
     model.addAttribute("horariosDisponiveis", horarios);
 
-        return "horario"; // Renderiza a página para escolher o horário
-    }
-
+    return "horario"; // Renderiza a página para escolher o horário
+}
     @PostMapping("/passo3-horario")
     public String processarPasso3(@RequestParam("horario") String horarioStr,
                                   @ModelAttribute("agendamento") Agendamento agendamento) {
