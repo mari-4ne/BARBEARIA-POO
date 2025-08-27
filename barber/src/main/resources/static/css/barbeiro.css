@@ -1,0 +1,71 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #1a0e06, #000);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 95%;
+    max-width: 900px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #E6A15C;
+    text-shadow: 0 0 8px rgba(0,0,0,0.8);
+    margin-bottom: 25px;
+}
+
+/* ======== Área principal ======== */
+.step-content {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(6px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+}
+
+/* ======== Lista de barbeiros ======== */
+.choice-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* ======== Card do barbeiro ======== */
+.choice-btn {
+    padding: 25px 20px;
+    border: none;
+    border-radius: 15px;
+    background: #b97a4a;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+.choice-btn:hover {
+    background: #E6A15C;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 0 20px rgba(230,161,92,0.8);
+}
+
+/* ======== Responsividade ======== */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+    .choice-btn {
+        font-size: 1rem;
+        padding: 18px;
+    }
+}
