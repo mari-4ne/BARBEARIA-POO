@@ -1,51 +1,127 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Agenda do Colaborador</title>
+  <link rel="stylesheet" th:href="@{/css/agenda-colaborador.css}">
+  <link rel="stylesheet" th:href="@{/css/inicial.css}">
+  <style>
+    
+    .horario-agendado {
+      background-color: #ffcccc;
+      color: #a80000;
+      font-weight: bold;
+      text-decoration: line-through;
+    }
+    .horario-disponivel {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .horario-indisponivel {
+      background-color: #f0f0f0;
+      color: #888;
+    }
+    .horario-item {
+      padding: 2px 5px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .agenda-container {
+      position: relative;
+    
+    }
+    .voltar-container {
+      margin-top: 15px;
+      text-align: center;
+      background-color: #f0f0f0;
+      color: black;
+       position: absolute;
+      top: 25px;
+      right: 25px;
+    }
+
+  </style>
 </head>
+
 <body>
-  <h1>Agenda do Colaborador</h1>
+  <div class="agenda-container">
+    <h1>Essa é a sua agenda da semana <span th:text="${colaborador.nome}">FULANO</span></h1>
 
-  <!-- Botões -->
-  <div>
-    <a th:href="@{/colaborador/indisponibilizar-horario/{id}(id=${colaborador.id})}">Indisponibilizar Horários</a> |
-    <a th:href="@{/colaborador/disponibilizar-horario/{id}(id=${colaborador.id})}">Disponibilizar Horários</a>
+    <div class="botao-container">
+      <a class="button" th:href="@{/colaborador/indisponibilizar-horario/{id}(id=${colaborador.id})}">Indisponibilizar
+        Horários</a> |
+      <a class="button" th:href="@{/colaborador/disponibilizar-horario/{id}(id=${colaborador.id})}">Disponibilizar
+        Horários</a>
+    </div>
+
+    <div class="voltar-container">
+      <a class="button voltar-button" th:href="@{/}">Voltar para o Início</a>
+    </div>
+
+    <div class="semana">
+      <div class="dia">
+        <h2>SEGUNDA</h2>
+        <ul>
+          <li th:each="h : ${todosOsHorarios}">
+            <span th:text="${h}" class="horario-item"
+                  th:classappend="${#lists.contains(horariosSegundaAgendados, h) ? 'horario-agendado' : 
+                                   (#lists.contains(horariosSegunda, h) ? 'horario-disponivel' : 'horario-indisponivel')}">
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dia">
+        <h2>TERÇA</h2>
+        <ul>
+          <li th:each="h : ${todosOsHorarios}">
+            <span th:text="${h}" class="horario-item"
+                  th:classappend="${#lists.contains(horariosTercaAgendados, h) ? 'horario-agendado' : 
+                                   (#lists.contains(horariosTerca, h) ? 'horario-disponivel' : 'horario-indisponivel')}">
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dia">
+        <h2>QUARTA</h2>
+        <ul>
+          <li th:each="h : ${todosOsHorarios}">
+            <span th:text="${h}" class="horario-item"
+                  th:classappend="${#lists.contains(horariosQuartaAgendados, h) ? 'horario-agendado' : 
+                                   (#lists.contains(horariosQuarta, h) ? 'horario-disponivel' : 'horario-indisponivel')}">
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dia">
+        <h2>QUINTA</h2>
+        <ul>
+          <li th:each="h : ${todosOsHorarios}">
+            <span th:text="${h}" class="horario-item"
+                  th:classappend="${#lists.contains(horariosQuintaAgendados, h) ? 'horario-agendado' : 
+                                   (#lists.contains(horariosQuinta, h) ? 'horario-disponivel' : 'horario-indisponivel')}">
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dia">
+        <h2>SEXTA</h2>
+        <ul>
+          <li th:each="h : ${todosOsHorarios}">
+            <span th:text="${h}" class="horario-item"
+                  th:classappend="${#lists.contains(horariosSextaAgendados, h) ? 'horario-agendado' : 
+                                   (#lists.contains(horariosSexta, h) ? 'horario-disponivel' : 'horario-indisponivel')}">
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-
-  <h2>Segunda</h2>
-  <ul>
-    <li th:each="h : ${horariosSegunda}">
-      <span th:text="${h}"></span> - Disponível
-    </li>
-  </ul>
-
-  <h2>Terça</h2>
-  <ul>
-    <li th:each="h : ${horariosTerca}">
-      <span th:text="${h}"></span> - Disponível
-    </li>
-  </ul>
-
-  <h2>Quarta</h2>
-  <ul>
-    <li th:each="h : ${horariosQuarta}">
-      <span th:text="${h}"></span> - Disponível
-    </li>
-  </ul>
-
-  <h2>Quinta</h2>
-  <ul>
-    <li th:each="h : ${horariosQuinta}">
-      <span th:text="${h}"></span> - Disponível
-    </li>
-  </ul>
-
-  <h2>Sexta</h2>
-  <ul>
-    <li th:each="h : ${horariosSexta}">
-      <span th:text="${h}"></span> - Disponível
-    </li>
-  </ul>
 </body>
+
 </html>

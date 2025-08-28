@@ -1,57 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Indisponibilizar Horários</title>
+  <link rel="stylesheet" th:href="@{/css/indisponibilizar-horario.css}">
+  <link rel="stylesheet" th:href="@{/css/inicial.css}">
 </head>
+
 <body>
-  <h1>Indisponibilizar Horários</h1>
+   <div class="container">
+    <h1>Indisponibilizar Horários</h1>
 
-  <form action="/colaborador/indisponibilizar/confirmar" method="post">
+    <form action="/colaborador/indisponibilizar/confirmar" method="post">
+      <div class="semana">
 
-    <h2>Segunda</h2>
-    <div th:each="horario : ${horariosSegunda}">
-      <label>
-        <input type="checkbox" name="horarios" th:value="'Segunda-' + ${horario}" />
-        <span th:text="${horario}"></span>
-      </label><br>
-    </div>
+        <div class="dia">
+          <h2>Segunda</h2>
+          <div th:each="horario : ${horariosSegunda}">
+            <label>
+              <input type="checkbox" name="horarios" th:value="'Segunda-' + ${horario}" />
+              <span th:text="${horario}"></span>
+            </label>
+          </div>
+        </div>
 
-    <h2>Terça</h2>
-    <div th:each="horario : ${horariosTerca}">
-      <label>
-        <input type="checkbox" name="horarios" th:value="'Terca-' + ${horario}" />
-        <span th:text="${horario}"></span>
-      </label><br>
-    </div>
+        <div class="dia">
+          <h2>Terça</h2>
+          <div th:each="horario : ${horariosTerca}">
+            <label>
+              <input type="checkbox" name="horarios" th:value="'Terca-' + ${horario}" />
+              <span th:text="${horario}"></span>
+            </label>
+          </div>
+        </div>
 
-    <h2>Quarta</h2>
-    <div th:each="horario : ${horariosQuarta}">
-      <label>
-        <input type="checkbox" name="horarios" th:value="'Quarta-' + ${horario}" />
-        <span th:text="${horario}"></span>
-      </label><br>
-    </div>
+        <div class="dia">
+          <h2>Quarta</h2>
+          <div th:each="horario : ${horariosQuarta}">
+            <label>
+              <input type="checkbox" name="horarios" th:value="'Quarta-' + ${horario}" />
+              <span th:text="${horario}"></span>
+            </label>
+          </div>
+        </div>
 
-    <h2>Quinta</h2>
-    <div th:each="horario : ${horariosQuinta}">
-      <label>
-        <input type="checkbox" name="horarios" th:value="'Quinta-' + ${horario}" />
-        <span th:text="${horario}"></span>
-      </label><br>
-    </div>
+        <div class="dia">
+          <h2>Quinta</h2>
+          <div th:each="horario : ${horariosQuinta}">
+            <label>
+              <input type="checkbox" name="horarios" th:value="'Quinta-' + ${horario}" />
+              <span th:text="${horario}"></span>
+            </label>
+          </div>
+        </div>
 
-    <h2>Sexta</h2>
-    <div th:each="horario : ${horariosSexta}">
-      <label>
-        <input type="checkbox" name="horarios" th:value="'Sexta-' + ${horario}" />
-        <span th:text="${horario}"></span>
-      </label><br>
-    </div>
+        <div class="dia">
+          <h2>Sexta</h2>
+          <div th:each="horario : ${horariosSexta}">
+            <label>
+              <input type="checkbox" name="horarios" th:value="'Sexta-' + ${horario}" />
+              <span th:text="${horario}"></span>
+            </label>
+          </div>
+        </div>
+      </div>
 
-    <br>
-    <input type="hidden" name="colaboradorId" th:value="${colaborador.id}">
-    <button type="submit">Confirmar</button>
-  </form>
+      <input type="hidden" name="colaboradorId" th:value="${colaborador.id}">
+      <button type="submit">Confirmar</button>
+    </form>
+  </div>
 </body>
+
 </html>

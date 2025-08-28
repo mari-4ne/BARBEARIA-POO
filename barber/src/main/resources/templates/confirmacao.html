@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <title>Confirmação do Agendamento</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+     <link rel="stylesheet" th:href="@{/css/confirmacao.css}">
 </head>
 <body>
     <div class="container">
         <header>
             <h1><span>CONFIRMAÇÃO</span></h1>
         </header>
-
         <main class="step-content">
             <form th:action="@{/agendamento/salvar}" th:object="${agendamento}" method="post">
-
                 <div class="summary-section confirmation-summary">
                     <h2>RESUMO DO SEU AGENDAMENTO:</h2>
                     <div class="summary-item" th:if="*{colaborador != null}">
@@ -35,7 +34,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="options-section client-details">
                     <h2>SEUS DADOS:</h2>
                     <div class="form-group">
@@ -47,7 +45,6 @@
                         <input type="tel" id="telefoneCliente" th:field="*{cliente.telefone}" required>
                     </div>
                 </div>
-
                 <div class="confirmation-action">
                     <button type="submit" class="choice-btn confirm-btn">
                         CONFIRMAR AGENDAMENTO

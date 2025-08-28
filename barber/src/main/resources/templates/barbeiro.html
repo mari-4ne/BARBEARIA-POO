@@ -4,20 +4,17 @@
     <meta charset="UTF-8">
     <title>Agendamento</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/barbeiro.css}">
 </head>
 <body>
     <div class="container">
         <header>
             </header>
-
         <main class="step-content">
             <div class="summary-section"></div>
             <div class="options-section">
-                <h2>ESCOLHA O SEU BARBEIRO:</h2>
-                
+                <h2>ESCOLHA O SEU BARBEIRO:</h2>   
                 <form th:action="@{/agendamento/passo1-barbeiro}" method="post" class="choice-list">
-
-
                     <div th:each="colab : ${colaboradores}">
                         <button type="submit" name="colaboradorId" th:value="${colab.id}" class="choice-btn">
                             <span class="icon"></span>

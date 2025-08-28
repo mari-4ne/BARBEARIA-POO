@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Agendamento</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/dia.css}">
 </head>
 <body>
     <div class="container">
@@ -23,16 +24,17 @@
             </div>
             <div class="options-section">
                 <h2>DIAS DISPONIVEIS:</h2>
-                <div class="options-box day-list">
-                   <form th:action="@{/agendamento/passo2-dia}" method="post">
-                        <div th:each="dia : ${diasDisponiveis}" th:if="${dia.name() != 'SABADO' and dia.name() != 'DOMINGO'}">
-                            <button type="submit" name="dia" th:value="${dia.name()}" class="choice-btn"
-                                    th:text="${dia.name().substring(0,1) + dia.name().substring(1).toLowerCase()}">
-                                Dia da Semana
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                <form th:action="@{/agendamento/passo2-dia}" method="post" class="options-box day-list">
+                    <button th:each="dia : ${diasDisponiveis}" 
+                            th:if="${dia.name() != 'SABADO' and dia.name() != 'DOMINGO'}"
+                            type="submit" 
+                            name="dia" 
+                            th:value="${dia.name()}" 
+                            class="choice-btn"
+                            th:text="${dia.name().substring(0,1) + dia.name().substring(1).toLowerCase()}">
+                        Dia da Semana
+                    </button>
+                </form>
             </div>
         </main>
     </div>

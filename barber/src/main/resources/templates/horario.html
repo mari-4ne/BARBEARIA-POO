@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/horario.css}">
 </head>
 <body>
     <div class="container">
@@ -13,14 +14,16 @@
         </header>
 
         <main class="step-content">
+
             <div class="summary-section">
-                 <div class="summary-item" th:if="${agendamento.colaborador != null}">
+                <div class="summary-item" th:if="${agendamento.colaborador != null}">
                     <p>BARBEIRO ESCOLHIDO:</p>
                     <div class="value">
                         <span class="icon"></span>
-                          <span th:text="${agendamento.colaborador.nome}">Nome do Barbeiro</span>
+                        <span th:text="${agendamento.colaborador.nome}">Nome do Barbeiro</span>
                     </div>
                 </div>
+
                 <div class="summary-item">
                     <p>DIA ESCOLHIDO:</p>
                     <div class="value">
@@ -29,16 +32,22 @@
                     </div>
                 </div>
             </div>
-               <div class="options-section">
-                   <h2>HORÁRIOS DISPONIVEIS:</h2>
-                   <div class="options-box time-grid">
-                      <form th:action="@{/agendamento/passo3-horario}" method="post">
-                           <button type="submit" name="horario" th:each="h : ${horariosDisponiveis}"
-                             th:value="${h}" th:text="${h}" class="choice-btn">
-                           </button>
-                      </form>
-                  </div>
-              </div>          
+
+  
+            <div class="options-section">
+                <h2>HORÁRIOS DISPONÍVEIS:</h2>
+                <div class="options-box time-grid">
+                    <form th:action="@{/agendamento/passo3-horario}" method="post">
+                        <button type="submit" 
+                                name="horario" 
+                                th:each="h : ${horariosDisponiveis}"
+                                th:value="${h}" 
+                                th:text="${h}" 
+                                class="choice-btn">
+                        </button>
+                    </form>
+                </div>
+            </div>          
         </main>
     </div>
 </body>

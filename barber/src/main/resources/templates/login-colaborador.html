@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/css/inicial.css}">
+  <link rel="stylesheet" th:href="@{/css/login-colaborador.css}">
+</head>
+<body>
+  <div class="container-login">
     <h1>Login</h1>
     <form action="login-colaborador" method="post">
-        <label for="login">Login
-        <input type="text" name="login" id="login">
-        <label for="password">Senha</label>
-        <input type="text" name="password" id="password">
-        <button type="submit">enviar</button>
+      <label for="login">Login</label>
+      <input type="text" name="login" id="login">
+      <label for="password">Senha</label>
+      <input type="password" name="password" id="password">
+      <button type="submit">Enviar</button>
     </form>
+  </div>
+</body>
 </html>
