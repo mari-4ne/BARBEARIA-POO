@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/serviço.css}">
 </head>
 <body>
     <div class="container">
@@ -39,9 +40,11 @@
                 <h2>ESCOLHA O SERVIÇO:</h2>
                 <div class="choice-list">
                     <form th:action="@{/agendamento/processar-passo4-servico}" method="post">
+                        
                         <button type="submit" name="servicoEscolhido" value="CABELO" class="choice-btn">
                             <span>Cabelo</span>
                         </button>
+
                         <button type="submit" name="servicoEscolhido" value="BARBA" class="choice-btn">
                             <span>Barba</span>
                         </button>
